@@ -6,6 +6,8 @@
 " Modified from Throsten Maerz's cvsmenu (https://www.vim.org/scripts/script.php?script_id=58)
 "
 " Change Log:
+" [03/23/2022]
+"  - Added macos support
 " [12/30/2016]
 "  - Added git support
 
@@ -1004,8 +1006,11 @@ function! GITdiff(...)
     let @z=system('cat '.file)
   else
     let rev = (a:0 == 0) ? ' ' : a:1.' '
-    "let @z=system($GITCMD.' diff '.rev.file.' | patch -R -s -o - '.file)
-    let @z=system($GITCMD.' diff '.rev.file.' | patch -R -s -o - '.file.' | dos2unix')
+    if has('macunix')
+      let @z=system($GITCMD.' diff '.rev.file.' | patch -R -s -o /dev/stdout '.file)
+    else
+      let @z=system($GITCMD.' diff '.rev.file.' | patch -R -s -o - '.file.' | dos2unix')
+    endif
     unlet rev
   endif
   vne
