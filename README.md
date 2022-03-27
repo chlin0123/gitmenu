@@ -12,24 +12,27 @@ git clone https://github.com/chlin0123/gitmenu.git
 | Shortcut | Command                              |
 |----------|--------------------------------------|
 | ,gd      | git diff                             |
-| ,ga      | git annotate                         |
+| ,gn      | git annotate                         |
 | ,gl      | git log                              |
 | ,gp      | git diff HEAD^ (diff to the parent)  |
 | q        | close the window                     |
 
 ### Windows
-After using the above shortcuts, gitmenu will open a horzontal or vertical split window with the requested output. Type
-`:h window-move-cursor` in vim to know how to move between windows.
-Type 'q' to close the newly opened window
+After using the above shortcuts, gitmenu will open a horzontal or vertical split window with the 
+requested output. Type `CTRL-W w` to move between windows, and type `q` in the the new window to 
+close it. You may also type `:h window-move-cursor` to learn more about moving between windows.
 
-### Working on diffs 
-`,gd` and `,gp` opens a new window in diff mode, so you can easily get/move diff chunks between
-the modified and original version. You can type `do` to obtain the diff from another window and 
-type `dp` to put a diff to another window. (You should only modify the file, not the scratch buffer
-gitmenu created for comparison). Type `:h copy-diffs` for more information.
+### Working on diffs
+`,gd` or `,gp` opens a new window in diff mode, so you can easily get/move diff chunks between
+the two windows. You should only modify the original window, not the new window created by gitmenu 
+created since it doesn't map to any real file. If you want to revert a diff chunk to the git repo 
+version, you may type move your cursor to the target diff in the original window, and then type 
+`do`. You may type `:h copy-diffs` for more information about copying diff sections between windows.
 
-### Additional Tips
-You may open both annotate and log windows and find commit log message for a line in the original file.
-The common whole word search `*` or `#` doesn't work well because the commit id hash in the annotate 
-window is a short version. Try using the non-whole-word seach `g*` and `g#`. Type `:h g*` in your vim
-for more details.
+### Finding commit message for a source line
+If you want to find the commit message for a source line, you can first use `,gn` to open an 
+annotate window which shows the short version commit hash id of each source line, and then use `,gl`
+to open git log for the commit messages. Move the cursor to the desired short commit hash id and 
+type `g*` or `g#` to perform a partial-word search, and then move to the log window to see the 
+result. Don't use the whole-word seach `*` or `#` otherwise the long version commit hash id in the 
+annotate window won't be considered as a matche. Type `:h g*` in your vim for more details.
