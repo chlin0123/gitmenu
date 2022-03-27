@@ -6,6 +6,8 @@
 " Modified from Throsten Maerz's cvsmenu (https://www.vim.org/scripts/script.php?script_id=58)
 "
 " Change Log:
+" [03/27/2022]
+"  - Diff mode clean up bug fix
 " [03/23/2022]
 "  - Added macos support
 " [12/30/2016]
@@ -1021,7 +1023,7 @@ function! GITdiff(...)
   difft
   let @z=bak
   unlet file bak
-  silent! nmap <unique> <buffer> q :bd<cr>:call GITSwitchDiffMode()<cr>
+  silent! nmap <unique> <buffer> q :diffoff<cr>:bd<cr>:call GITSwitchDiffMode()<cr>
 endfunction
 
 " diff to parent (HEAD^)
